@@ -8,8 +8,7 @@
 </head>
 <body>
     <img src="" id="mario" alt="mario">
-    <script>
-        
+    <script>   
         console.log('about to fetch mario :)')
 
         // with fetch 
@@ -34,8 +33,6 @@
             const blob = await response.blob();
             document.getElementById('mario').src = URL.createObjectURL(blob);
         }
-
-
 
     </script>
 </body>
