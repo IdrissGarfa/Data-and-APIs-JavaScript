@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data and APIs 1</title>
+</head>
+<body>
+    <img src="" id="mario" alt="mario">
+    <script>
+        
+        console.log('about to fetch mario :)')
+
+        // with fetch 
+
+        // fetch('mario.jpg')
+        // .then(response => {
+        //     return response.blob();
+        // }).then(blob => {
+        //     document.getElementById('mario').src = URL.createObjectURL(blob);
+        // }).catch(err => {
+        //     console.log('error : '+err);
+        // })
+
+        //with async / await
+
+        catchMario()
+        .then(res => console.log('yay'))
+        .catch(err => console.log('error: '+err));
+
+        async function catchMario() {
+            const response = await fetch('mario.jpg');
+            const blob = await response.blob();
+            document.getElementById('mario').src = URL.createObjectURL(blob);
+        }
+
+
+
+    </script>
+</body>
+</html>
