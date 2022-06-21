@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,21 +12,18 @@
     <canvas id="chart" width="400" height="400"></canvas>
     <script>
 
-    const xlabels = []; 
-    const ytemps = [];
-
     chartIt();
 
     async function chartIt() {   
-        await getData();
+        const data = await getData();
         const ctx = document.getElementById('chart').getContext('2d');
         const myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: xlabels,
+                labels: data.xs,
                 datasets: [{
                     label: 'Combined Land-Surface Air and Sea-Surface Water Temperature',
-                    data: ytemps,
+                    data: data.ys,
                     fill: false,
                     backgroundColor:'rgba(255, 99, 132, 0.2)',
                     borderColor:'rgba(255, 99, 132, 1)',
@@ -44,21 +41,26 @@
     }
 
     async function getData() {
-        const response = await fetch('data.csv');
-        const data = await response.text();
 
+        const xs = [];
+        const ys = [];
+
+        const response = await fetch('data.csv');        
+        const data = await response.text();
         const table = data.split('\n').slice(1);
 
         table.forEach(row => {
             const columns = row.split(',');
             const year = columns[0];
-            xlabels.push(year);
+            xs.push(year);
             // console.log(xlabels);
             const temp = columns[1]; 
-            ytemps.push(temp);
+            ys.push(temp);
             // console.log(ytemps);
             console.log(year, temp);
         })
+        
+        return {xs , ys};
     }
 
     </script>
